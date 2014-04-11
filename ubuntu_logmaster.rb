@@ -15,12 +15,12 @@ class LogMaster
 
 		@file.each do |line|
 			line = line.split
-			for i in 0..9
+			(0..9).each do |i|
 				if(line[2] =~ /^0#{i}/)
 					tab[i] +=1
 				end
 			end
-			for i in 10..23
+			(10..23).each do |i|
 				if(line[2] =~ /^#{i}/)
 					tab[i] +=1
 				end
