@@ -1,5 +1,10 @@
 #! ruby
 
+# 11.04.14
+
+########################
+# For system logs only #
+
 class LogMaster
 	def initialize(file)
 		@file = file
@@ -35,7 +40,7 @@ class LogMaster
 		@file.each do |line|
 			line = line.split(/\d+:\d+:\d+/)
 			line[1] = line[1].split
-			line[1].shift if line[1][0] =~ /gojira/
+			line[1].shift if line[1][0] =~ /gojira/	#user name
 			if count.has_key?(line[1][0])
 				count[line[1][0]] += 1
 			else
