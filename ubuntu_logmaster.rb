@@ -35,16 +35,19 @@ class LogMaster
 	end
 
 
-	def occurence
+	def occurence(opt=nil)
 		count = {}
 		@file.each do |line|
-			line = line.split(/\d+:\d+:\d+/)
-			line[1] = line[1].split
-			line[1].shift if line[1][0] =~ /gojira/	#user name
-			if count.has_key?(line[1][0])
-				count[line[1][0]] += 1
+			line = line.split(/\d+:\d+:\d+/)[1]
+			line = line.split
+			line.shift if line[0] =~ /gojira/	#user name
+			unless opt.nil?
+				line[0].slice!(/\[.*\]/)
+			end
+			if count.has_key?(line[0])
+				count[line[0]] += 1
 			else
-				count[line[1][0]] = 1
+				count[line[0]] = 1
 			end
 		end
 
@@ -58,12 +61,14 @@ end
 file = File.open(ARGV.shift)
 script = LogMaster.new(file)
 
-print "\nOPTIONS:\noc -occurance of logs by hour\nfr -frequency of logs\n=> "
+print "\nOPTIONS:\noc -occurance of logs by hour\nocn -occurance with no PID\nfr -frequency of logs\n=> "
 STDOUT.flush
 opt = gets.chomp
 
 if opt == "oc"
 	script.occurence
+elsif opt == "ocn"
+	script.occurence(true)
 elsif opt == "fr"
 	script.frequency
 else
