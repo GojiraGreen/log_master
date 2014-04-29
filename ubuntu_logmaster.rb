@@ -62,7 +62,12 @@ end
 file = File.open(ARGV.shift)
 script = LogMaster.new(file)
 
-print "\nOPTIONS:\nocu -occurance of logs by hour\nocn -occurance with no PID\nfrq -frequency of logs\n=> "
+p "OPTIONS:"
+p "ocu -occurance of logs by hour"
+p "ocn -occurance with no PID"
+p "frq -frequency of logs"
+print "\n=> "
+
 STDOUT.flush
 opt = gets.chomp
 
