@@ -1,9 +1,7 @@
 #! ruby
 
-# 11.04.14
-
-########################
-# For system logs only #
+#######################
+# For ubuntu sys logs #
 
 class LogMaster
   def initialize(file)
